@@ -7,6 +7,8 @@ const TOKEN = process.env.RECRUITEE_TOKEN;
 const PORT = process.env.PORT || 3000;
 
 function recruitee(path, method = 'GET', body = null) {
+  const url = `https://api.recruitee.com/c/${COMPANY_ID}${path}`;
+  console.log(`[recruitee] ${method} ${url} | token: ${TOKEN ? TOKEN.slice(0,6)+'...' : 'MISSING'}`);
   const opts = {
     method,
     headers: {
@@ -15,8 +17,11 @@ function recruitee(path, method = 'GET', body = null) {
     }
   };
   if (body) opts.body = JSON.stringify(body);
-  return fetch(`https://api.recruitee.com/c/${COMPANY_ID}${path}`, opts)
-    .then(r => r.json());
+  return fetch(url, opts).then(async r => {
+    const data = await r.json();
+    console.log(`[recruitee] status: ${r.status} | keys: ${Object.keys(data).join(', ')}`);
+    return data;
+  });
 }
 
 const TOOLS = [
