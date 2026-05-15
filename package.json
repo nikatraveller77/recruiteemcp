@@ -1,0 +1,13 @@
+{
+  "name": "recruitee-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Recruitee ATS",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "express": "^4.18.2"
+  }
+}
